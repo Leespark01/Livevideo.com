@@ -1,0 +1,107 @@
+import os
+import zipfile
+
+# Define the folder structure
+project_root = "/mnt/data/Livevideo.com"
+css_dir = os.path.join(project_root, "css")
+js_dir = os.path.join(project_root, "js")
+images_dir = os.path.join(project_root, "images")
+
+# Create the directories
+os.makedirs(css_dir, exist_ok=True)
+os.makedirs(js_dir, exist_ok=True)
+os.makedirs(images_dir, exist_ok=True)
+
+# Create the HTML, CSS, and JS files
+index_html = """<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Livevideo.com</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Welcome to Livevideo.com</h1>
+    </header>
+
+    <main>
+        <section>
+            <h2>About Us</h2>
+            <p>This is a placeholder for your website content. Add more sections as needed.</p>
+        </section>
+        
+        <section>
+            <h2>Live Videos</h2>
+            <p>Here you can feature your live videos.</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Livevideo.com. All rights reserved.</p>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
+"""
+
+style_css = """body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 1em 0;
+}
+
+main {
+    padding: 20px;
+}
+
+h1, h2 {
+    color: #333;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 1em 0;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+"""
+
+script_js = """document.addEventListener('DOMContentLoaded', function() {
+    console.log('Livevideo.com is ready!');
+    // Add your JavaScript code here
+});
+"""
+
+# Write the files
+with open(os.path.join(project_root, "index.html"), "w") as file:
+    file.write(index_html)
+
+with open(os.path.join(css_dir, "style.css"), "w") as file:
+    file.write(style_css)
+
+with open(os.path.join(js_dir, "script.js"), "w") as file:
+    file.write(script_js)
+
+# Create a zip file
+zip_file_path = "/mnt/data/Livevideo.com.zip"
+with zipfile.ZipFile(zip_file_path, 'w') as zipf:
+    # Write the HTML, CSS, and JS files to the zip
+    zipf.write(os.path.join(project_root, "index.html"), arcname="Livevideo.com/index.html")
+    zipf.write(os.path.join(css_dir, "style.css"), arcname="Livevideo.com/css/style.css")
+    zipf.write(os.path.join(js_dir, "script.js"), arcname="Livevideo.com/js/script.js")
+
+zip_file_path
